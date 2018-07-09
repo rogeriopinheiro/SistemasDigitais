@@ -1,0 +1,42 @@
+module som(input clock,
+	input [43:0] Et1,
+	input [43:0] Et2,
+	output[43:0] St0);
+	
+	reg [43:0] exit = 0;
+	reg [43:0] auxiliar = 0;
+ 	assign S0 = saida;
+	always @(posedge clock) begin
+		auxiliar <= Et1 + Et2;
+		exit = auxiliar + exit; 
+	end
+endmodule
+
+module teste;
+	reg clock;
+	reg[43:0] Et1, Et2;
+	wire[43:0] St0;
+	always #3 clock = ~clock;
+	som BB(clock, Et1, Et2, St0);
+	initial begin
+		$dumpvars();
+		#0 clock <= 0;
+		Et1 <= 2;
+		Et2 <= 2;
+		//4
+		#6
+		Et1 <= 4;
+		Et2 <= 4;
+		//12
+		#6
+		Et1 <= 5;
+		Et2 <= 5;
+		//22
+		#6
+		Et1 <= 3;
+		Et2 <= 3;
+		//28
+		#12	
+		$finish;
+	end
+endmodule
