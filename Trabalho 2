@@ -1,0 +1,49 @@
+módulo  (
+     reg de saída [ 6 : 0 ] HE3,
+     reg de saída [ 6 : 0 ] HE2,
+     reg de saída [ 6 : 0 ] HE1,
+     reg de saída [ 6 : 0 ] HE0,
+    entrada CLOCK_50,
+    entrada [ 9 : 0 ] SW,
+    entrada [ 3 : 0 ] CHAVE
+   );
+    
+	 reg [ 25 : 0 ] contam;
+    reg lig;
+    reg [ 25 : 0 ] cont =  3 ;
+	 
+	 wire [ 20 : 0 ] wrap = numeraçao [ 20 : 0 ];
+    
+    sempre @ ( posedge CLOCK_50) começar
+       if (SW [ 0 ] ==  1 ) começar
+             HE3 =  7'b0001001 ;
+             HE2 =  7'b0000110 ;
+             HE1 =  7'b1000111 ;
+             HEO =  7'b0001100 ;
+        fim
+       mais  começo
+            numeraçao <= numeraçao + cont;
+            se (contar > =  50000000 ) começar
+              lig <=  ~ lig;
+              numeraçao <=  0 ;
+                    HE3 <= HEO;
+                    HE2 <= HE3;
+                    HE1 <= HE2;
+                    HEO <= HE1;    
+            fim
+        fim
+   
+        if (chavinha [ 0 ] ==  0 )
+        início
+            cont <=  3 ;
+        fim
+        else  if (chavinha [ 1 ] ==  0  & wrap ==  0  & cont <= 50 )
+        início
+            cont <= (cont +  1 );
+        fim
+        else  if (chavinha [ 2 ] ==  0  & wrap ==  0  & cont > = 2 )
+        início
+            cont <= (cont -  1 );
+        fim
+    fim
+endmodule
