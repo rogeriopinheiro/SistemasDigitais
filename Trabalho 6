@@ -1,0 +1,40 @@
+
+module VGA (
+  	input CLOCK_50,
+  	output [3:0] vgaR,
+  	output [3:0] vgaG,
+	output [3:0] vgaB,
+ 	output vgaHS,
+	output vgaVS);
+
+reg [10:0] c0x = 0;
+reg [9:0]  c0y = 0;
+
+assign vgaR = v ? 4'hf : 4'b0;
+assign vgaG = v ? 4'hf : 4'b0;
+assign vgaB = v ? 4'hf : 4'b0;
+
+wire v = (c0x >= 285) & (c0x < 1555) & (c0y >= 35) & (c0y < 515);
+
+assign vgaHS = c0x >= 190;
+assign vgaVS = c0y >= 2;
+
+always @(posedge CLOCK_50) begin
+	if (c0x == 1585) 
+    begin
+        if (c0y == 525) begin
+			c0y <= 0;
+        end
+		else 
+			c0y <= c0y + 1;
+		c0x <= 0;
+	end
+    else 
+    begin
+        // c0y <= c0y;
+		c0x <= c0x + 1;
+    end
+end
+
+
+endmodul
