@@ -1,0 +1,69 @@
+module sinalzinho(
+    input [11:0] P01X,
+    input [11:0] P01Y,
+    input [11:0] P02X,
+    input [11:0] P02Y,
+    input [11:0] PT0oX,
+    input [11:0] PT0oY,
+    
+    output s
+);
+
+    wire signed [11:0] subb01;
+    wire signed [11:0] subb02;
+    wire signed [11:0] subb03;
+    wire signed [11:0] subb04;
+    wire signed [22:0] subb05;
+
+    wire signed [22:0] mu01;
+    wire signed [22:0] mu02;
+
+    assign sub1 = PT0oX - P02X;
+    assign sub2 = P01Y - P02Y;
+    assign sub3 = P01X - P02X;
+    assign sub4 = PT0oY - P02Y;
+    assign mul1 = subb01 * subb02;
+    assign mul2 = subb03 * subb04;
+    assign sub5 = mu01 - mu02;
+
+    assign s = (subb05 >= 0) ? 1 : 0;
+endmodule
+
+
+module testeTri(
+    input [11:0] P01X,
+    input [11:0] P01Y,
+
+    input [11:0] P02X,
+    input [11:0] P02Y,
+
+    input [11:0] P03X,
+    input [11:0] P03Y,
+
+    input [11:0] PT0X,
+    input [11:0] PT0Y,
+    output in
+    );
+
+    wire sl1;
+    wire sl2;
+    wire sl3;
+    assign in = (sl1 == 1 && sl2 == 1 && sl3 == 1) ? 1 : 0;
+
+    sinal S1(P01X, P01Y, P02X, P02Y, PT0oX, PT0oY, sl1);
+    sinal S2(P02X, P02Y, P03X, P03Y, PT0oX, PT0oY, sl2);
+    sinal S3(P03X, P03Y, P01X, P01Y, PT0oX, PT0oY, sl3);
+
+endmodule
+
+module teste;
+    reg [11:0] P01X;
+    reg [11:0] P01Y;
+    reg [11:0] P02X;
+    reg [11:0] P02Y;
+    reg [11:0] P03X;
+    reg [11:0] P03Y;
+    reg [11:0] PT0oX;
+    reg [11:0] PT0oY;
+
+    wire In;
