@@ -1,0 +1,73 @@
+typedef struct _ponto
+{
+    int i;
+    int j;
+} Ponto;
+
+int Triângulo (Ponto A0, Ponto B0, Ponto C0, Ponto T0)
+{
+  int detA0, detB0, detC0, detT0, dett0;
+  int i, j;
+
+  detT = (Ai * Bj * 1) + (Aj * 1 * Ci) + (1 * Bi * Cj) - (1 * Bj * Ci) - (1 * Cj * Ai) - (1 * Aj * Bi);
+  if (detT <0) {detT * = - 1; } // Módulo
+  detA = (Ti * Aj * 1) + (Tj * 1 * Bi) + (1 * Ai * Bj) - (1 * Aj * Bi) - (Ti * 1 * Bj) - (Tj * Ai * 1);
+  if (detA <0) {detA * = - 1; } // Módulo
+  detB = (Ti * Bj * 1) + (Tj * 1 * Ci) + (1 * Bi * Cj) - (1 * Bj * Ci) - (Ti * 1 * Cj) - (Tj * Bi * 1);
+  if (detB <0) {detB * = - 1; } // Módulo
+  detC = (Ti * Cj * 1) + (Tj * 1 * Ai) + (1 * Ci * Aj) - (1 * Cj * Ai) - (Ti * 1 * Aj) - (Tj * Ci * 1);
+  if (detC <0) {detC * = - 1; } // Módulo
+  dett = detA + detB + detC;
+  // printf ("detT0:% d \ ndetA0:% d \ ndetB0:% d \ ndetC0:% d \ ndet0:% d \ n", detT0, detA0, detB0, detC0, dett0); //Depurar
+
+ if (dett <= detT)
+ {
+   return 1;
+ }
+ outro
+ {
+   return 0;
+ }
+}
+
+int main ()
+{
+    Ponto A, B, C, T;
+
+    printf ("\ nInforme uma primeira coordenada do triagulo! \ n");
+    printf ("Ai =");
+    scanf ("% d", & A.i);
+    printf ("Aj =");
+    scanf ("% d", & A.j);
+
+    printf ("\ nInforme uma segunda coordenada do triagulo! \ n");
+    printf ("Bi =");
+    scanf ("% d", e B.i);
+    printf ("Bj =");
+    scanf ("% d", & B.j);
+
+    printf ("\ nInforme uma terceira coordenada do triagulo! \ n");
+    printf ("Ci =");
+    scanf ("% d", & C.i);
+    printf ("Cj =");
+    scanf ("% d", & C.j);
+
+    para (Ti = 1; Ti <I; T.i ++)
+    {
+      para (Tj = 1; Tj <J; T.j ++)
+      {
+        if (TesteTriangulo (A, B, C, T))
+        {
+          printf ("*");
+        }
+        outro
+        {
+          printf ("-");
+        }
+      }
+    printf ("\ n");
+    }
+
+
+    return 0;
+}
